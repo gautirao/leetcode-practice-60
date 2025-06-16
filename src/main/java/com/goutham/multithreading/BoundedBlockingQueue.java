@@ -2,10 +2,7 @@ package com.goutham.multithreading;
 
 /**
  * Design and implement a bounded blocking queue in Java with the following methods:
- *
- * java
- * Copy
- * Edit
+
  * class BoundedBlockingQueue {
  *     public BoundedBlockingQueue(int capacity);
  *     public void enqueue(int item) throws InterruptedException;
