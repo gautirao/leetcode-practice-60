@@ -47,6 +47,6 @@ class ThreadSafeLoggerTest {
     }
     countDownLatch.await();
     executorService.shutdown();
-    assertTrue(allowedCount.get() == 1);
+    assertEquals(1, allowedCount.get());
   }
 }

@@ -14,10 +14,11 @@ public class LRUCache {
         }
     }
 
-    private int capacity;
-    private HashMap<Integer,Node> cache;
+    private final int capacity;
+    private final HashMap<Integer,Node> cache;
 
-    private Node head,tail;
+    private final Node head;
+    private final Node tail;
 
     public LRUCache(int capacity) {
         this.capacity = capacity;
@@ -47,7 +48,7 @@ public class LRUCache {
                 Node lru = tail.prev;
                 removeNode(lru);
                 cache.remove(lru.key);
-            };
+            }
             Node node = new Node(key,value);
             insertToHead(node);
             cache.put(key,node);
