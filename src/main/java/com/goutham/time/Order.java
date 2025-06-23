@@ -4,7 +4,7 @@ import java.time.*;
 import java.time.temporal.ChronoUnit;
 
 public class Order {
-  private String id;
+  private final String id;
   private LocalDate orderDate; // user-friendly date
   private LocalDateTime deliveryTime; // date + time (no zone)
   private Instant createdAt; // UTC timestamp
@@ -37,6 +37,10 @@ public class Order {
 
   public boolean isDeliveryInFuture() {
     return getZonedDeliveryTime().isAfter(ZonedDateTime.now(customerZone));
+  }
+
+  public LocalDate maximumDeliveryDate() {
+    return orderDate.plus(Period.ofDays(7));
   }
 
   public long daysUntilDelivery() {
