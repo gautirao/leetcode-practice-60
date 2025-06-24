@@ -24,7 +24,7 @@ class ListProcessorTest {
   }
 
   private static List<String> createLargeList(int size) {
-    // duplicates every 100
+    // duplicates every 10
     return IntStream.range(0, size).mapToObj(i -> "item" + (i % 10)).collect(Collectors.toList());
   }
 
