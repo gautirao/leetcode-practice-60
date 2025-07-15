@@ -1,6 +1,7 @@
 package com.goutham.simple;
 
 import java.util.Objects;
+import java.util.Set;
 
 public class PasswordValidator {
 
@@ -10,19 +11,14 @@ public class PasswordValidator {
     if (Objects.isNull(password ) || password.length() < MIN_PASSWORD_LENGTH) {
       return false;
     }
-    boolean hasUpper = false;
-    boolean hasLower = false;
-    boolean hasDigit = false;
-    boolean hasSpecialCharacter = false;
-    boolean hasWhiteSpace = false;
+    Set<Character> specialChars = Set.of('@', '#', '$', '%', '^', '&', '+', '=');
 
-    for (Character c : password.toCharArray()) {
-      if (Character.isDigit(c)) hasDigit = true;
-      else if (Character.isUpperCase(c)) hasUpper = true;
-      else if (Character.isLowerCase(c)) hasLower = true;
-      else if (Character.isWhitespace(c)) hasWhiteSpace = true;
-      else if ("@#$%^&+=".indexOf(c) >= 0) hasSpecialCharacter = true;
-    }
-    return hasUpper && hasLower && hasDigit && hasSpecialCharacter && !hasWhiteSpace;
+    if (!password.chars().anyMatch(Character::isDigit)) return false;
+    if (!password.chars().anyMatch(Character::isUpperCase)) return false;
+    if (!password.chars().anyMatch(Character::isLowerCase)) return false;
+    if (password.chars().anyMatch(Character::isWhitespace)) return false;
+    if (!password.chars().anyMatch(specialChars::contains)) return false;
+
+    return true;
   }
 }

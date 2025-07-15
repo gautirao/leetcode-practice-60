@@ -30,14 +30,15 @@ public class ThreadSafeLogger {
         long now = System.currentTimeMillis();
         AtomicBoolean allowed = new AtomicBoolean(false);
 
-        long updatedTime = lastLogYimeStamps.compute(message,(msg,lastTime) -> {
-            if( lastTime == null || now - lastTime >= intervalMills){
-                allowed.set(true);
-                return now;
-            }else {
-                return lastTime;
-            }
-
+    lastLogYimeStamps.compute(
+        message,
+        (msg, lastTime) -> {
+          if (lastTime == null || now - lastTime >= intervalMills) {
+            allowed.set(true);
+            return now;
+          } else {
+            return lastTime;
+          }
         });
 
     return allowed.get();
